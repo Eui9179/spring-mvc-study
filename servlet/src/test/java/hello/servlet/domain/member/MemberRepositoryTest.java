@@ -7,6 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings("unchecked")
 class MemberRepositoryTest {
     MemberRepository memberRepository = MemberRepository.getInstance();
 
@@ -40,7 +41,7 @@ class MemberRepositoryTest {
         memberRepository.save(member3);
 
         //when
-        List<Member> result = memberRepository.findAll();
+        List result = memberRepository.findAll();
 
         //then
         assertThat(result.size()).isEqualTo(3); // 개수 확인

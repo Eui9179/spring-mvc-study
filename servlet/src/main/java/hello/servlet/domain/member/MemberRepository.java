@@ -10,15 +10,18 @@ public class MemberRepository {
     private static Map<Long, Member> store = new HashMap<>();
     private static Long sequence = 0L;
 
-    private static final MemberRepository instance = new MemberRepository();
+    private static MemberRepository instance;
 
     private MemberRepository() {}
 
     public static MemberRepository getInstance(){
+        if (instance == null) {
+            instance = new MemberRepository();
+        }
         return instance;
     }
 
-    public static Member save(Member member){
+    public Member save(Member member){
         member.setId(++sequence);
         store.put(member.getId(), member);
         return member;
@@ -29,7 +32,7 @@ public class MemberRepository {
     }
 
     public List findAll(){
-        return new ArrayList<Member>(store.values()); //store를 리스트로 보호하기 위해서
+        return new ArrayList<>(store.values()); //store를 리스트로 보호하기 위해서
     }
 
     public void clearStore(){
