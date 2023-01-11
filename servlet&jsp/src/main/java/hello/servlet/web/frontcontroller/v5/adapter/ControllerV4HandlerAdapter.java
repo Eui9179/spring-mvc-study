@@ -15,23 +15,26 @@ import java.util.Map;
 public class ControllerV4HandlerAdapter implements MyHandlerAdapter {
     @Override
     public boolean supports(Object handler) {
-        return handler instanceof ControllerV4
+        return handler instanceof ControllerV4;
     }
 
     @Override
     public ModelView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
-        ControllerV4 controllerV4 = (ControllerV4) handler;
+        ControllerV4 controller = (ControllerV4) handler;
         Map<String, Object> model = new HashMap<>();
-        Map<String, String> requestParams = paramsToMap(request);
-        String viewName = controllerV4.process(requestParams, model);
-        // TODO String?
-        return null;
+        Map<String, String> requestParams = createParamMap(request);
+        String viewName = controller.process(requestParams, model);
+
+        ModelView mv = new ModelView(viewName);
+        mv.setModel(model);
+
+        return mv;
     }
 
-    private static Map<String, String> paramsToMap(HttpServletRequest request) {
-        Map<String, String> paramMap = new HashMap<>();
+    private static Map<String, String> createParamMap(HttpServletRequest request) {
+        Map<String, String> result = new HashMap<>();
         request.getParameterNames().asIterator()
-                .forEachRemaining(params -> paramMap.put(params, request.getParameter(params)));
-        return paramMap;
+                .forEachRemaining(param -> result.put(param, request.getParameter(param)));
+        return result;
     }
 }
