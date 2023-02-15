@@ -47,6 +47,8 @@ public class RequestBodyJsonController {
     public String requestBodyJsonV3(@RequestBody HelloData helloData) throws IOException {
         //@RequestBody 생략 불가능
         //생략하면 @ModelAttribute로 설정됨
+        //@ModelAttribute는 요청 파라미터를 객체에 바인딩해주는것
+        //@RequestBody는 http 메시지 바디의 내용을 꺼내서 바인딩함
         log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
