@@ -1,7 +1,5 @@
 # Dispathcer Servlet
 
----
-
 ## 프론트 컨트롤러
 
 **FontController** **패턴 특징**
@@ -11,8 +9,7 @@
 - 공통 처리하는 코드
 - 프론트 컨트롤러를 제외한 나머지 컨트롤러는 서블릿을 사용하지 않아도 된다.
 
-
-- 사진
+![front-controller](https://github.com/Eui9179/spring-mvc-study/assets/83222282/78336797-ab75-4c20-88f7-2ea99105275f)
 
 ## 서블릿
 
@@ -33,7 +30,8 @@
 
 스프링 웹 MVC의 **DispatcherServlet**이 FrontController 패턴으로 구현되어 있다.
 
-- 사진
+![spring-mvc-flow](https://github.com/Eui9179/spring-mvc-study/assets/83222282/4af02956-9084-4c7a-8f46-543aa2c40664)
+
 
 위 사진의 동작을 알아보자
 
@@ -42,10 +40,7 @@
 3. **핸들러 어댑터**에 컨트롤러의 응답이 들어오면 **ModelAndView** 로 응답을 가공해 반환한다.
 4. **View** 형식으로 리턴하는 컨트롤러를 사용할 때는 **viewResolver** 를 통해 **View**를 받아 리턴한다.
 
-<aside>
 💡 뷰가 없는 어플리케이션은 viewResolver 를 호출하지 않고 REST 형식의 @RequestBody를 사용하고**MessageConverter**를 거처 JSON 형식으로 응답한다.
-
-</aside>
 
 ### 대표적인 Handler Mapping
 
@@ -107,8 +102,6 @@ private static MyView viewResolver(String viewName) {
 ```
 
 ## @ModelAttribut와 @RequestBody
-
----
 
 - `@ModelAttribute`는 `@RequestParam`을 객체화하여 받는 것이다. 따라서 HTTP 메서드가 post라면 form 데이터를 맵핑하고 HTTP 메서드가 get이라면 request parameter를 맵핑한다.
 - `@ModelAttribute`는 생략가능하다.
